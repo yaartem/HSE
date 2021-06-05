@@ -180,14 +180,7 @@
      <item>
       <widget class="QPushButton" name="pushButton">
        <property name="text">
-        <string>Add new review</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>Rate the book</string>
+        <string>Rate the book/Add a review</string>
        </property>
       </widget>
      </item>
@@ -234,7 +227,6 @@
  </widget>
  <tabstops>
   <tabstop>pushButton</tabstop>
-  <tabstop>pushButton_2</tabstop>
  </tabstops>
  <resources/>
  <connections/>

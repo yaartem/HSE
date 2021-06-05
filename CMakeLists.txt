@@ -43,6 +43,9 @@ set(PROJECT_SOURCES
         addingbook.cpp
         addingbook.h
         addingbook.ui
+        review.cpp
+        review.h
+        review.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

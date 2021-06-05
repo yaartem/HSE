@@ -16,6 +16,8 @@ private:
     int Reviews;
     QString Price;
     QString Year;
+    QString PersonalReview;
+    int PersonalRating;
 
 public:
     Book()
@@ -28,6 +30,8 @@ public:
         this->Reviews=0;
         this->Price="";
         this->Year="";
+        PersonalReview="";
+        PersonalRating=0;
     }
     Book(QString FullLine, QString Name, QString Author,QString Genre, float Rating, int Reviews, QString Price, QString Year)
     {
@@ -39,6 +43,8 @@ public:
         this->Reviews=Reviews;
         this->Price=Price;
         this->Year=Year;
+        PersonalReview="";
+        PersonalRating=0;
     }
     void SetFullName (QString FullLine){this->FullLine=FullLine;}
     void SetName(QString Name){this->Name=Name;}
@@ -48,6 +54,8 @@ public:
     void SetReviews(int Reviews){this->Reviews=Reviews;}
     void SetPrice(QString Price){this->Price=Price;}
     void SetYear(QString Year){this->Year=Year;}
+    void SetPersonalReview (QString PersonalReview){this->PersonalReview=PersonalReview;}
+    void SetPersonalRating (int PersonalRating){this->PersonalRating=PersonalRating;}
 
     QString GetFullLine(){return this->FullLine;}
     QString GetName(){return this->Name;}
@@ -57,6 +65,8 @@ public:
     int GetReviews(){return this->Reviews;}
     QString GetPrice(){return this->Price;}
     QString GetYear(){return this->Year;}
+    QString GetPersonalReview (){return this->PersonalReview;}
+    int GetPersonalRating (){return this->PersonalRating;}
 };
 
 
@@ -75,6 +85,8 @@ public:
 
 private slots:
     void on_pushButton_3_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::Dialog *ui;

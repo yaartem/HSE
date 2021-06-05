@@ -1,5 +1,6 @@
 #include "dialog.h"
 #include "ui_dialog.h"
+#include "review.h"
 
 #include <iostream>
 #include <QFile>
@@ -40,4 +41,10 @@ void Dialog::on_pushButton_3_clicked()
     QVector<Book>::Iterator itr = b->begin()+i;
     b->erase(itr);
     close();
+}
+
+void Dialog::on_pushButton_clicked()
+{
+    Review *r = new Review(this, i, b);
+    r->show();
 }
