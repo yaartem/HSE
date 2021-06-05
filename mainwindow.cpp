@@ -44,6 +44,17 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_pushButton_3_clicked()
 {
+    csv->clear();
+    books.clear();
+
+    csv->setColumnCount(1);
+    csv->setHorizontalHeaderLabels(QStringList() << "Name");
+
+    proxyModel->setSourceModel(csv);
+
+    ui->tableView->setModel(proxyModel);
+    ui->tableView->setSortingEnabled(true);
+
     QString Name;
     QString Author;
     QString Genre;
@@ -73,7 +84,7 @@ void MainWindow::on_pushButton_3_clicked()
             Reviews = (lineAsVector.at(3)).toInt();
             Price = QString(lineAsVector.at(4));
             Year = QString(lineAsVector.at(5));
-            books.append(Book(Name,Author,Genre,Rating,Reviews,Price,Year));
+            books.append(Book(QString(line),Name,Author,Genre,Rating,Reviews,Price,Year));
             row++;
         }
         file.close();
@@ -121,24 +132,37 @@ void MainWindow::on_pushButton_4_clicked()
     }
     else if(books.length()<(ui->tableView->model()->rowCount()))
     {
-        int i = 1;
+        int i = 0;
         QString fileName = QFileDialog::getOpenFileName(this,"File in which to add book","*.txt");
-        while(books.length() > ui->tableView->model()->rowCount())
+        QFile file(fileName);
+        file.open(QIODevice::ReadOnly);
+        file.readLine();
+        QByteArray n = "Name,Author,User Rating,Reviews,Price,Year,Genre\n";
+        csv->clear();
+        csv->setColumnCount(1);
+        csv->setHorizontalHeaderLabels(QStringList() << "Name");
+
+        proxyModel->setSourceModel(csv);
+
+        ui->tableView->setModel(proxyModel);
+        ui->tableView->setSortingEnabled(true);
+        while(!file.atEnd())
         {
-            Book x = books.at(books.length()-i);
-            QFile file(fileName);
-            file.open(QIODevice::ReadOnly);
-            QByteArray f = file.readAll();
-            file.close();
-            if (file.open(QIODevice::WriteOnly))
+            QByteArray line = file.readLine();
+            Book x = books.at(i);
+            if(x.GetFullLine().toUtf8() == line)
             {
-                file.write(f);
+                n.append(x.GetFullLine().toUtf8());
+                csv->insertRows(i, 1);
+                csv->setData(csv->index(i, 0), x.GetName());
+                i++;
             }
-            file.close();
-            csv->insertRows(ui->tableView->model()->rowCount()-1, 1);
-            csv->setData(csv->index(ui->tableView->model()->rowCount()-1, 0), x.GetName());
-            file.close();
-            i++;
+         }
+        file.close();
+        if (file.open(QIODevice::WriteOnly))
+        {
+            file.write(n);
         }
+        file.close();
     }
 }

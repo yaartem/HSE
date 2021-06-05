@@ -8,6 +8,7 @@
 class Book
 {
 private:
+    QString FullLine;
     QString Name;
     QString Author;
     QString Genre;
@@ -19,6 +20,7 @@ private:
 public:
     Book()
     {
+        this->FullLine="";
         this->Name="";
         this->Author="";
         this->Genre="";
@@ -27,8 +29,9 @@ public:
         this->Price="";
         this->Year="";
     }
-    Book(QString Name, QString Author,QString Genre, float Rating, int Reviews, QString Price, QString Year)
+    Book(QString FullLine, QString Name, QString Author,QString Genre, float Rating, int Reviews, QString Price, QString Year)
     {
+        this->FullLine=FullLine;
         this->Name=Name;
         this->Author=Author;
         this->Genre=Genre;
@@ -37,6 +40,7 @@ public:
         this->Price=Price;
         this->Year=Year;
     }
+    void SetFullName (QString FullLine){this->FullLine=FullLine;}
     void SetName(QString Name){this->Name=Name;}
     void SetAuthor(QString Author){this->Author=Author;}
     void SetGenre(QString Genre){this->Genre=Genre;}
@@ -45,6 +49,7 @@ public:
     void SetPrice(QString Price){this->Price=Price;}
     void SetYear(QString Year){this->Year=Year;}
 
+    QString GetFullLine(){return this->FullLine;}
     QString GetName(){return this->Name;}
     QString GetAuthor(){return this->Author;}
     QString GetGenre(){return this->Genre;}
